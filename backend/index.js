@@ -9,7 +9,7 @@ const app = express();
 
 const db = new sqlBase("Base_de_datos.db");
 
-// Middlewares - orden correcto para que afecten a todas las rutas
+
 app.use(cors());
 app.use(express.json());
 

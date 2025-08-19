@@ -1,4 +1,4 @@
-import { useState } from 'react'; // Conecta a backend
+import React, { useState } from 'react';
 
 function Register() {
     const [mensaje, setMensaje] = useState('');
