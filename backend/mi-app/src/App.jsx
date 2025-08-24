@@ -16,7 +16,7 @@ function App() {
     return (
         <div>
             <div className="app-header">
-                <h1 className="app-title">paginita</h1>
+                <h1 className="app-title">google</h1>
                 <p className="app-subtitle">front y backend
                     
                 </p>
