@@ -90,4 +90,30 @@ router.get("/perfil", verificarToken, (req, res) => {
     });
 });
 
+// rutas para actualizar el nombre de usuario y la contraseña
+router.put("/perfil/username", verificarToken, (req, res) => {
+    const { nuevoUsername } = req.body;
+    const usernameActual = req.usuario.username;
+    if (!nuevoUsername) {
+        return res.status(400).json({ mensaje: "Faltan datos" });
+    }       
+
+    db.prepare("UPDATE usuarios SET username = ? WHERE username = ?").run(nuevoUsername,usernameActual );
+    res.json({ mensaje: "El nombre de usuario se ha actualizado correctamente :)"})
+
+});
+
+router.put("/perfil/password", verificarToken, async (req, res) => {
+    const { nuevaPassword } = req.body;
+    const usernameActual = req.usuario.username;
+
+    if (!nuevaPassword) {
+        return res.status(400).json({ mensaje: "Faltan datos" });
+    }
+
+    const hashedPassword = await bcryptjs.hash(nuevaPassword, 10);
+    db.prepare("UPDATE usuarios SET password = ? WHERE username = ?").run(hashedPassword, usernameActual);
+    res.json({ mensaje: "La contraseña se ha actualizado correctamente :)" });
+});
+
 module.exports = router;

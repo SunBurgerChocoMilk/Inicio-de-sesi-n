@@ -6,7 +6,6 @@ import Login from './components/Login.jsx'
 
 function App() {
     const [vista, setVista] = useState(null);
-    const token = localStorage.getItem('token');
 
     const cerrarSesion = () => {
         localStorage.removeItem('token');
@@ -16,7 +15,7 @@ function App() {
     return (
         <div>
             <div className="app-header">
-                <h1 className="app-title">google</h1>
+                <h1 className="app-title">página</h1>
                 <p className="app-subtitle">front y backend
                     
                 </p>
@@ -24,33 +23,37 @@ function App() {
             
             <div className="main-container">
                 <div className="nav-buttons">
-                    <button 
-                        className={`nav-button ${vista === 'register' ? 'active' : ''}`}
-                        onClick={() => setVista('register')}
-                    >
-                        📝 Registrarse
-                    </button>
-                    <button 
-                        className={`nav-button ${vista === 'login' ? 'active' : ''}`}
-                        onClick={() => setVista('login')}
-                    >
-                        🚀 Iniciar Sesión
-                    </button>
-                    <button 
-                        className={`nav-button ${vista === 'perfil' ? 'active' : ''}`}
-                        onClick={() => setVista('perfil')}
-                    >
-                        👤 Perfil
-                    </button>
-                    {token && (
+                    {vista === 'perfil' ? (
                         <button 
                             className="nav-button logout"
                             onClick={cerrarSesion}
-                        >
+                       >
                             🚪 Cerrar Sesión
                         </button>
+                    ) : (
+                        <>
+                            <button 
+                className={`nav-button ${vista === 'register' ? 'active' : ''}`}
+                onClick={() => setVista('register')}
+            >
+                📝 Registrarse
+                            </button>
+                            <button 
+                                className={`nav-button ${vista === 'login' ? 'active' : ''}`}
+                                onClick={() => setVista('login')}
+                            >
+                                🚀 Iniciar Sesión
+                            </button>
+                            <button 
+                                className={`nav-button ${vista === 'perfil' ? 'active' : ''}`}
+                                onClick={() => setVista('perfil')}
+                            >
+                                👤 Perfil
+                          </button>
+                        </>
                     )}
                 </div>
+
 
                 <div className="form-container">
                     {vista === 'register' && <Register />}

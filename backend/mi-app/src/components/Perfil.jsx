@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
+import Dashboard from './Dashboard';
 
 
 function Perfil() {
     const [usuario, setUsuario] = useState(null);
     const [mensaje, setMensaje] = useState ('');
+    const token = localStorage.getItem('token');
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -34,6 +36,7 @@ function Perfil() {
             {usuario && (
                 <div>
                     <p>Nombre de usuario: {usuario.username}</p>
+                    <Dashboard />
                 </div>
             )}
         </div>
